@@ -4,14 +4,19 @@ import colors from "./colors";
 const defaultStyles = StyleSheet.create({
   pageContainer: {
     flex: 1,
-    backgroundColor: colors.darkbackground,
+    backgroundColor: colors.lightbackground,
     justifyContent: "center",
     alignItems: "center",
   },
   bodyText: {
     fontSize: 20,
-    color: colors.textondark,
+    color: colors.textonlight,
   },
+  headerText: {
+    fontSize: 700,
+    marginTop: 8,
+    color: "white"
+  }
 });
 
 export default defaultStyles;

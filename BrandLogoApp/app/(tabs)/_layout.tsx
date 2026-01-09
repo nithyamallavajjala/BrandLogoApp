@@ -3,12 +3,18 @@ import Feather from '@expo/vector-icons/Feather';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Tabs } from "expo-router";
+import { View } from 'react-native';
+import AppHeader from '../components/AppHeader';
 import colors from "../styles/colors";
 
 export default function TabsLayout() {
   return (
+    <View style={{ flex: 1 }}>
+      <AppHeader />
+
     <Tabs
       screenOptions={{
+        headerShown: false,
         tabBarActiveTintColor: colors.secondary,
         tabBarInactiveTintColor: colors.mediumgrey,
         headerStyle: {
@@ -22,11 +28,11 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
-        name="builder"
+        name="tacoBuilder"
         options={{
           headerTitle: "Taco Builder",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="taco" size={24} color={color} />
+          tabBarIcon: ({ color,focused }) => (
+            <MaterialCommunityIcons name={"taco"} size={24} color={color} />
           ),
         }}
       />
@@ -48,7 +54,10 @@ export default function TabsLayout() {
           ),
         }}
       />
+
+    
     
     </Tabs>
+    </View>
   );
 }
