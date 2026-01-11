@@ -11,12 +11,8 @@ const defaultStyles = StyleSheet.create({
   bodyText: {
     fontSize: 20,
     color: colors.textonlight,
+    
   },
-  headerText: {
-    fontSize: 700,
-    marginTop: 8,
-    color: "white"
-  }
 });
 
 export default defaultStyles;

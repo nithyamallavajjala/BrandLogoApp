@@ -1,29 +1,44 @@
+import { StatusBar } from "expo-status-bar";
 import { Image, StyleSheet, Text, View } from "react-native";
 import colors from "../styles/colors";
-import defaultStyles from "../styles/defaultStyles";
-
 
 export default function AppHeader() {
-  return <View style={styles.container}>
-    <Image 
-    style = {styles.image}
-    source = {require("../../assets/images/icon.png")}
-    >
-    </Image>
-    <Text style = {defaultStyles.headerText}> Taco 'Bout It</Text>
-  </View>;
+  return (
+    <>
+      <StatusBar style="light" />
+      <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={require("../../assets/images/icon.png")}
+        ></Image>
+        <Text style={styles.headerText}> Taco 'Bout It</Text>
+      </View>
+    </>
+  );
 }
 const styles = StyleSheet.create({
   container: {
-    height: 180,
+    height: 120,
     backgroundColor: colors.secondarydark,
     alignItems: "center",
-    paddingTop: 50,
-
+    justifyContent: "flex-start",
+    paddingTop: 20,
+    flexDirection: "row",
+    paddingBottom: 10,
   },
-  image: {
-    width: 80,
-    height: 80,
 
-  }
+  image: {
+    width: 60,
+    height: 60,
+    marginLeft: 30,
+    alignSelf: "flex-end",
+  },
+
+  headerText: {
+    fontSize: 28,
+    marginTop: 38,
+    color: colors.textondark,
+    fontWeight: "bold",
+    fontFamily: "Georgia",
+  },
 });
