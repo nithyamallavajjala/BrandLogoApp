@@ -15,15 +15,15 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: colors.secondary,
-        tabBarInactiveTintColor: colors.mediumgrey,
+        tabBarActiveTintColor: colors.primarylight,
+        tabBarInactiveTintColor: colors.secondary,
         headerStyle: {
           backgroundColor: colors.secondary,
         },
         headerShadowVisible: false,
         headerTintColor: colors.darkbackground,
         tabBarStyle: {
-          backgroundColor: colors.lightbackground,
+          backgroundColor: colors.secondarydark,
         },
       }}
     >
