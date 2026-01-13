@@ -4,7 +4,7 @@ import { Pressable, TextInput, View } from "react-native";
 import colors from "../styles/colors";
 import defaultStyles from "../styles/defaultStyles";
 
-
+//https://chatgpt.com/share/696664fc-b008-800a-ad68-7805715e9211
 type propsType = {
   placeholder: string;
   placeholderTextColor?: string;
