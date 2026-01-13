@@ -12,7 +12,17 @@ const defaultStyles = StyleSheet.create({
     fontSize: 20,
     color: colors.error,
     fontWeight: "bold",
+    fontFamily: "Georgia"
     
+  },
+
+  headerText: {
+    fontSize: 50,
+    color: colors.error,
+    fontWeight: "bold",
+    fontFamily: "Georgia",
+    marginBottom: 40,
+    marginLeft: 40
   },
    button: {
     height: 50,
@@ -38,6 +48,11 @@ textInputBox: {
     marginBottom: 15,
     textAlign: "center",
     borderColor: colors.secondarydark,
+    flexDirection: "row",
+},
+image: {
+  width: 70,
+  height: 70
 }
 });
 

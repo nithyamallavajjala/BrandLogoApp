@@ -1,8 +1,8 @@
-import React from "react";
-import { TextInput, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { Pressable, TextInput, View } from "react-native";
 import colors from "../styles/colors";
 import defaultStyles from "../styles/defaultStyles";
-
 
 
 type propsType = {
@@ -12,6 +12,7 @@ type propsType = {
   value: string; 
   onChangeText: (newValue: string) => void; 
   style?: object;
+  isPassword?: boolean;
 };
 
 const TextField: React.FC<propsType> = ({
@@ -21,7 +22,9 @@ const TextField: React.FC<propsType> = ({
   value,
   onChangeText,
   style,
+  isPassword = false,
 }) => {
+   const [isHidden, setIsHidden] = useState(isPassword);
   return (
     <View>
       <TextInput
@@ -30,7 +33,18 @@ const TextField: React.FC<propsType> = ({
         placeholderTextColor={placeholderTextColor}
         value={value}
         onChangeText={onChangeText}
+        secureTextEntry={isPassword && isHidden}
       />
+      {isPassword && (
+        <Pressable onPress={() => setIsHidden(prev => !prev)}>
+          <Ionicons
+            name={isHidden ? "eye-off" : "eye"}
+            size={22}
+            color={colors.secondarydark}
+            style={{ marginLeft: 8 }}
+          />
+        </Pressable>
+      )}
     </View>
   );
 };
