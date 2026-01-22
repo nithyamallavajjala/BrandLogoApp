@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { Pressable, TextInput, View } from "react-native";
 import colors from "../styles/colors";
 import defaultStyles from "../styles/defaultStyles";
-
+//Learned from chat how to implement hiding/showing functionality
+//and use icon as a button
 //https://chatgpt.com/share/696664fc-b008-800a-ad68-7805715e9211
 type propsType = {
   placeholder: string;
@@ -26,7 +27,7 @@ const TextField: React.FC<propsType> = ({
 }) => {
    const [isHidden, setIsHidden] = useState(isPassword);
   return (
-    <View>
+    <View style ={defaultStyles.textFieldContainer} >
       <TextInput
         style={[defaultStyles.textInputBox, { borderColor: borderColor }, style]}
         placeholder={placeholder}

@@ -8,6 +8,18 @@ const defaultStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  textFieldContainer:{
+    width: 250,
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 2,
+    borderRadius: 20,
+    borderColor: colors.lightbackground,
+
+    paddingHorizontal: 12,
+    marginVertical: 4,
+  },
   bodyText: {
     fontSize: 20,
     color: colors.error,
@@ -22,9 +34,10 @@ const defaultStyles = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: "Georgia",
     marginBottom: 40,
-    marginLeft: 40
+    marginLeft: 40,
+    marginTop: 40
   },
-   button: {
+button: {
     height: 50,
     width: 100,
     borderWidth: 2,
@@ -34,21 +47,20 @@ const defaultStyles = StyleSheet.create({
     justifyContent: "center",
     margin: 10,
   },
-  buttonText: {
+buttonText: {
     fontSize: 18,
     color: colors.darkbackground,
   
-  },
+},
 textInputBox: {
     width: 250,
     height: 50,
     borderWidth: 2,
     borderRadius: 20,
     fontSize: 18,
-    marginBottom: 15,
+    paddingHorizontal: 15,
     textAlign: "center",
     borderColor: colors.secondarydark,
-    flexDirection: "row",
 },
 image: {
   width: 70,
