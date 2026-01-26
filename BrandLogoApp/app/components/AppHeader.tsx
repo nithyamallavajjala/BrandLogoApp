@@ -1,3 +1,4 @@
+import Entypo from '@expo/vector-icons/Entypo';
 import { usePathname } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Image, StyleSheet, Text, View } from "react-native";
@@ -14,6 +15,11 @@ function getTitleFromPath(pathname: string){
     return "App";
   }
 
+const handleLogout = () => {
+  console.log("logged out");
+};
+
+
 export default function AppHeader() {
   const pathname = usePathname();
   const title = getTitleFromPath(pathname)
@@ -26,6 +32,7 @@ export default function AppHeader() {
           source={require("../../assets/images/icon.png")}
         ></Image>
         <Text style={styles.headerText}>{title}</Text>
+        <Entypo name="log-out" size={24} color={colors.primarylight} onPress={handleLogout}  style={{ marginTop: 29, marginRight: 23 }}/>
       </View>
     </>
   );
@@ -35,7 +42,7 @@ const styles = StyleSheet.create({
     height: 120,
     backgroundColor: colors.secondarydark,
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     paddingTop: 20,
     flexDirection: "row",
     paddingBottom: 10,

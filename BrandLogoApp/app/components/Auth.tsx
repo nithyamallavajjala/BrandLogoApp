@@ -9,8 +9,8 @@ import TextField from './TextField';
 
 export default function Auth() {
     const router = useRouter();
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [email, setEmail] = useState<string>("@gmail.com");
+    const [password, setPassword] = useState<string>("123456");
     //learned how to check for digits in a password and helped corrcet syntax for if statements 
     //https://chatgpt.com/share/697230ce-7270-800a-b88f-54c11f78eab8
     //Date: 1/22/26
