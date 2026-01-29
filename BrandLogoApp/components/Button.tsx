@@ -1,8 +1,8 @@
 
 import React from "react";
 import { Text, TouchableHighlight } from "react-native";
-import colors from "../styles/colors";
-import defaultStyles from "../styles/defaultStyles";
+import colors from "../app/styles/colors";
+import defaultStyles from "../app/styles/defaultStyles";
 
 type propsType = {
   title: string;

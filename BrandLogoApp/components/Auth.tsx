@@ -1,9 +1,10 @@
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import defaultStyles from '../styles/defaultStyles';
+import React, { useEffect, useState } from 'react';
+import { Alert, AppState, AppStateStatus, StyleSheet, Text, View } from 'react-native';
+import defaultStyles from '../app/styles/defaultStyles';
 
-import colors from '../styles/colors';
+import { supabase } from '@/utils/supabase';
+import colors from '../app/styles/colors';
 import Button from './Button';
 import TextField from './TextField';
 
@@ -14,6 +15,58 @@ export default function Auth() {
     //learned how to check for digits in a password and helped corrcet syntax for if statements 
     //https://chatgpt.com/share/697230ce-7270-800a-b88f-54c11f78eab8
     //Date: 1/22/26
+
+    useEffect(() => {
+    const handleAppStateChange = (nextState: AppStateStatus) => {
+      if (nextState === "active") {
+        supabase.auth.startAutoRefresh();
+      } else {
+        try {
+          supabase.auth.stopAutoRefresh();
+        } catch {}
+      }
+    };
+
+    const subscription = AppState.addEventListener(
+      "change",
+      handleAppStateChange,
+    );
+
+    if (AppState.currentState === "active") {
+      supabase.auth.startAutoRefresh();
+    }
+
+    return () => {
+      if (typeof subscription?.remove === "function") {
+        subscription.remove();
+      }
+      try {
+        supabase.auth.stopAutoRefresh();
+      } catch {}
+    };
+  }, []);
+
+  async function signInWithEmail() {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      Alert.alert(error.message);
+    }
+  }
+
+  async function signUpWithEmail() {
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      Alert.alert(error.message);
+    }
+  }
 
     const checkFields = () => {
         console.log(email)
@@ -66,8 +119,8 @@ export default function Auth() {
         isPassword
       />
 
-      <Button title="Login" onPress={openTabNav} />
-      <Button title="SignUp" onPress={openTabNav} />
+      <Button title="Login" onPress={signInWithEmail} />
+      <Button title="SignUp" onPress={signUpWithEmail} />
     </View>
   );
 }

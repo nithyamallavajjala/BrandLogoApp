@@ -1,8 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Pressable, TextInput, View } from "react-native";
-import colors from "../styles/colors";
-import defaultStyles from "../styles/defaultStyles";
+import colors from "../app/styles/colors";
+import defaultStyles from "../app/styles/defaultStyles";
 //Learned from chat how to implement hiding/showing functionality
 //and use icon as a button
 //https://chatgpt.com/share/696664fc-b008-800a-ad68-7805715e9211

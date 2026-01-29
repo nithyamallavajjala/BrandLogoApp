@@ -4,7 +4,8 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Tabs } from "expo-router";
 import { View } from 'react-native';
-import AppHeader from '../components/AppHeader';
+
+import AppHeader from '@/components/AppHeader';
 import colors from "../styles/colors";
 
 export default function TabsLayout() {
