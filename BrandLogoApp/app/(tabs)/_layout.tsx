@@ -6,9 +6,27 @@ import { Tabs } from "expo-router";
 import { View } from 'react-native';
 
 import AppHeader from '@/components/AppHeader';
-import colors from "../styles/colors";
+import Auth from '@/components/Auth';
+import { useAuth } from '@/components/AuthProvider';
+import colors from "../../styles/colors";
 
 export default function TabsLayout() {
+
+  const { session } = useAuth();
+
+
+  // If session becomes null while inside tabs, render Auth in-place (no navigation)
+  // If session is null while inside the tabs navigator, render the Auth
+  // form in-place instead of attempting to force a navigation back to `/`.
+  // This keeps the app state intact and avoids brittle cross-navigator calls.
+  if (session === null) {
+    return (
+      <View style={{ flex: 1 }}>
+       
+        <Auth />
+      </View>
+    );
+  }
   return (
     <View style={{ flex: 1 }}>
       <AppHeader />

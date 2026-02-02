@@ -11,7 +11,7 @@ export default function Index() {
   useEffect(() => {
     if (session?.user) {
       // Replace prevents going "back" to login screen
-      router.replace("/");
+      router.replace("/(tabs)");
     }
   }, [router, session]);
 
@@ -28,7 +28,7 @@ export default function Index() {
   return (
     <View style={{ flex: 1 }}>
     
-      <Auth></Auth>
+      <Auth/>
     </View>
   );
 }

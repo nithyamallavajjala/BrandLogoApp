@@ -1,6 +1,6 @@
-
+// AppHeader.tsx  (replace the contents of your current AppHeader with this)
 import { Ionicons } from "@expo/vector-icons";
-import { router, usePathname } from "expo-router";
+import { usePathname } from "expo-router";
 import {
   Alert,
   Image,
@@ -10,14 +10,15 @@ import {
   View,
 } from "react-native";
 
+
+import colors from "@/styles/colors";
 import { supabase } from "@/utils/supabase";
-import colors from "../app/styles/colors";
 
 function getTitleFromPath(pathname: string) {
   if (pathname === "/") return "Welcome";
+  if (pathname.includes("index")) return "Taco Builder";
   if (pathname.includes("cart")) return "Cart";
   if (pathname.includes("menu")) return "Menu";
-  if (pathname.includes("builder")) return "Taco Builder";
   return "App";
 }
 
@@ -37,7 +38,6 @@ export default function AppHeader() {
         console.error("Logout error:", error);
         Alert.alert("Logout failed", error.message);
       }
-      router.replace("/")
     } catch (err: any) {
       Alert.alert("Logout failed", err?.message ?? String(err));
     }
@@ -47,10 +47,10 @@ export default function AppHeader() {
     <View style={styles.container}>
       <View style={styles.leftContainer}>
         <Image
-          style={styles.imageLogo}
+          style={styles.image}
           source={require("../assets/images/icon.png")}
         />
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.headerText}>{title}</Text>
       </View>
 
       {/* Right side: name image + logout button */}
@@ -62,7 +62,7 @@ export default function AppHeader() {
           accessibilityRole="button"
           accessibilityLabel="Log out"
         >
-          <Ionicons name="log-out-outline" size={24} color={colors.primarylight} />
+          <Ionicons name="log-out-outline" size={24} color={ colors.primarylight} />
         </TouchableOpacity>
       </View>
     </View>
@@ -70,15 +70,7 @@ export default function AppHeader() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%", // fill all available space
-    height: 90,
-    paddingHorizontal: 16,
-    backgroundColor: colors.secondary,
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-  },
+ container: { height: 120, backgroundColor: colors.secondarydark, alignItems: "center", justifyContent: "space-between", paddingTop: 20, flexDirection: "row", paddingBottom: 10, },
   leftContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -87,27 +79,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  title: {
-    fontSize: 30,
-    fontWeight: "800",
-    color: colors.primarylight,
-    marginLeft: 10,
-  },
-  imageLogo: {
-    height: 30,
-    width: 30,
-    marginBottom: 10,
-  },
-  imageName: {
-    height: 30,
-    width: 60,
-    marginBottom: 2,
-    marginRight: 8,
-  },
+
+  image: { width: 85, height: 60, marginLeft: 30, alignSelf: "flex-end", borderRadius: 6, marginTop: 20},
+  headerText: { fontSize: 28, marginTop: 28, color: colors.primarylight, fontWeight: "bold", fontFamily: "Georgia", marginLeft: 20 },
   logoutButton: {
+    marginTop: 30,
     padding: 6,
     borderRadius: 6,
-    // optional: a subtle touch target background when pressed
-    // backgroundColor: "rgba(255,255,255,0.03)",
   },
 });

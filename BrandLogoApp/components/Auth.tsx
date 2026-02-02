@@ -1,10 +1,10 @@
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Alert, AppState, AppStateStatus, StyleSheet, Text, View } from 'react-native';
-import defaultStyles from '../app/styles/defaultStyles';
+import defaultStyles from '../styles/defaultStyles';
 
 import { supabase } from '@/utils/supabase';
-import colors from '../app/styles/colors';
+import colors from '../styles/colors';
 import Button from './Button';
 import TextField from './TextField';
 
@@ -90,19 +90,7 @@ export default function Auth() {
         return true;
     }
 
-  const openTabNav = () => {
-    if(!checkFields()) 
-        return
-    if (email != "" && password != "") {
-        setEmail(email);
-        router.push({ pathname: "/(tabs)/cart", params: { email, password } });
-    }
-    else    
-    alert("Please enter your email and password");
-    
-    
-
-  };
+  
   return (
     <View style={styles.container}>
       <Text style={defaultStyles.headerText}>Welcome to Taco 'bout It</Text>
