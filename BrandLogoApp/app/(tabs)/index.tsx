@@ -4,38 +4,36 @@ import React, { useCallback, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import defaultStyles from "../../styles/defaultStyles";
 
-type locationCount = Record<string, number>;
+//Used chat on how to change order of location based on member number using supabase 
+//https://chatgpt.com/share/6981fdd8-32ac-800a-8845-55a1df6b8027
+type LocationRow = {
+  location: string;
+  count: number;
+};
 
 export default function BuilderScreen() {
-  const [counts, setCounts] = useState<locationCount>({});
+  const [counts, setCounts] = useState<LocationRow[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchCounts = useCallback(async () => {
     setLoading(true);
     try {
       const { data, error } = await supabase
-        .from("profiles")
-        .select("location");
+      .from("location_counts")
+      .select("*");
 
       if (error) {
         console.error("Error fetching counts:", error);
         return;
       }
 
-      const newCounts: locationCount = {};
-
-      for (const row of data ?? []) {
-        if (!row.location) continue;
-        newCounts[row.location] = (newCounts[row.location] ?? 0) + 1;
-      }
-
-      setCounts(newCounts);
-    } catch (err) {
-      console.error("fetchCounts exception:", err);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+       setCounts(data ?? []);
+  } catch (err) {
+    console.error("fetchCounts exception:", err);
+  } finally {
+    setLoading(false);
+  }
+}, []);
 
   // 🔑 THIS is the important part
   useFocusEffect(
@@ -52,16 +50,12 @@ export default function BuilderScreen() {
         <ActivityIndicator />
       ) : (
         <View style={styles.countContainer}>
-          <Text style={styles.countText}>
-            Palatine: {counts["Palatine"] ?? 0} members
-          </Text>
-          <Text style={styles.countText}>
-            Schaumburg {counts["Schaumburg"] ?? 0} members
-          </Text>
-          <Text style={styles.countText}>
-            Barrington: {counts["Barrington"] ?? 0} members
-          </Text>
-        </View>
+    {counts.map((item) => (
+      <Text key={item.location} style={styles.countText}>
+        {item.location}: {item.count} members
+      </Text>
+    ))}
+  </View>
       )}
     </View>
   );

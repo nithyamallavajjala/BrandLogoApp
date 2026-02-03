@@ -1,25 +1,45 @@
+import { Picker } from "@react-native-picker/picker";
 import React, { useState } from "react";
-import { Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Text, View } from "react-native";
 import Button from '../../components/Button';
 import TextField from "../../components/TextField";
-import defaultStyles from "../../styles/defaultStyles";
+
 
 export default function CartScreen() {
-  const [text, setText] = useState("")
-  return (
-    <SafeAreaView style={defaultStyles.pageContainer}>
-      <Text style={defaultStyles.bodyText}>Cart</Text>
-      <Button title="TEST" 
-      onPress={() => {
-        console.log("Button Pressed")
-      }}></Button>
+  const [protein, setProtein] = useState("");
+  const [toppings, setToppings] = useState("");
 
-    <TextField
-    placeholder="Enter text"
-    value={text}
-    onChangeText={setText}
-/>
-    </SafeAreaView>
+  return (
+    <View>
+    <Text>Time to Build your Taco!</Text>
+    <Button
+     title="Hard Shell"
+    onPress={() => {
+    console.log("Hard Shell pressed");
+    }}
+    />
+    <Button
+    title="Soft Shell"
+    onPress={() => {
+    console.log("Soft Shell pressed");
+    }}
+    />
+    <Picker
+        selectedValue={protein}
+        onValueChange={(itemValue: string) => setProtein(itemValue)}
+      >
+        <Picker.Item label="Select a protien..." value="" />
+        <Picker.Item label="Chicken" value="c" />
+        <Picker.Item label="Steak" value="s" />
+        <Picker.Item label="Beans" value="b" />
+      </Picker>
+      <TextField
+          placeholder="Please enter what toppings you want"
+          value={toppings}
+          onChangeText={setToppings}></TextField>
+
+        
+
+  </View>
   );
 }
