@@ -156,6 +156,7 @@ export default function Menu() {
 
   return (
     <View style={defaultStyles.pageContainer}>
+      <Text style={defaultStyles.bodyText}>Enter your profile data</Text>
       <View style={styles.form}>
         <TextField
           placeholder="First name"
