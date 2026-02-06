@@ -1,10 +1,18 @@
+import colors from "@/styles/colors";
 import { supabase } from "@/utils/supabase";
 import { useFocusEffect } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import defaultStyles from "../../styles/defaultStyles";
 
-//Used chat on how to change order of location based on member number using supabase 
+//Used chat on how to change order of location based on member number using supabase
 //https://chatgpt.com/share/6981fdd8-32ac-800a-8845-55a1df6b8027
 type LocationRow = {
   location: string;
@@ -25,21 +33,21 @@ export default function BuilderScreen() {
     setLoading(true);
     try {
       const { data, error } = await supabase
-      .from("location_counts")
-      .select("*");
+        .from("location_counts")
+        .select("*");
 
       if (error) {
         console.error("Error fetching counts:", error);
         return;
       }
 
-       setCounts(data ?? []);
-  } catch (err) {
-    console.error("fetchCounts exception:", err);
-  } finally {
-    setLoading(false);
-  }
-}, []);
+      setCounts(data ?? []);
+    } catch (err) {
+      console.error("fetchCounts exception:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   // 🔑 THIS is the important part
   useFocusEffect(
@@ -128,7 +136,7 @@ export default function BuilderScreen() {
         console.warn("Legacy realtime subscribe also failed:", err2);
       }
     }
-     return () => {
+    return () => {
       // Cleanup modern channel
       if (channel) {
         try {
@@ -148,14 +156,12 @@ export default function BuilderScreen() {
     };
   }, [fetchProfiles]);
   function ProfileRow({ item }: { item: Profile }) {
-  return (
-    <Text style={{ fontSize: 16, marginBottom: 6 }}>
-      {item.first_name} {item.last_name} — {item.total_orders} orders
-    </Text>
-  );
-}
-  
-  
+    return (
+      <Text style={{ fontSize: 16, marginBottom: 6 }}>
+        {item.first_name} {item.last_name} — {item.total_orders} orders
+      </Text>
+    );
+  }
 
   return (
     <View style={defaultStyles.pageContainer}>
@@ -165,12 +171,12 @@ export default function BuilderScreen() {
         <ActivityIndicator />
       ) : (
         <View style={styles.countContainer}>
-    {counts.map((item) => (
-      <Text key={item.location} style={styles.countText}>
-        {item.location}: {item.count} members
-      </Text>
-    ))}
-  </View>
+          {counts.map((item) => (
+            <Text key={item.location} style={styles.countText}>
+              {item.location}: {item.count} members
+            </Text>
+          ))}
+        </View>
       )}
       <Text style={defaultStyles.bodyText}>Order Leaderboard</Text>
       <FlatList
@@ -191,7 +197,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   countText: {
-    fontSize: 16,
+    fontSize: 25,
     marginBottom: 8,
+    color: colors.secondary,
   },
 });

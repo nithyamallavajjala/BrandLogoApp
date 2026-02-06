@@ -92,7 +92,7 @@ export default function Menu() {
       Alert.alert("Please enter a last name.");
       return false;
     }
-  
+
     return true;
   }
 
@@ -168,9 +168,11 @@ export default function Menu() {
           value={lastName}
           onChangeText={setLastName}
         />
-        
+        <Text style={defaultStyles.buttonText}>
+          Please pick between Schaumburg, Palatine, and Barrington
+        </Text>
         <TextField
-          placeholder="Please pick between Palatine, Schaumburg, and Barrington"
+          placeholder="Location"
           value={location}
           onChangeText={setLocation}
         />

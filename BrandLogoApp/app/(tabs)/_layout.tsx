@@ -1,28 +1,20 @@
-
-import Feather from '@expo/vector-icons/Feather';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Feather from "@expo/vector-icons/Feather";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Tabs } from "expo-router";
-import { View } from 'react-native';
+import { View } from "react-native";
 
-import AppHeader from '@/components/AppHeader';
-import Auth from '@/components/Auth';
-import { useAuth } from '@/components/AuthProvider';
+import AppHeader from "@/components/AppHeader";
+import Auth from "@/components/Auth";
+import { useAuth } from "@/components/AuthProvider";
 import colors from "../../styles/colors";
 
 export default function TabsLayout() {
-
   const { session } = useAuth();
 
-
-  // If session becomes null while inside tabs, render Auth in-place (no navigation)
-  // If session is null while inside the tabs navigator, render the Auth
-  // form in-place instead of attempting to force a navigation back to `/`.
-  // This keeps the app state intact and avoids brittle cross-navigator calls.
   if (session === null) {
     return (
       <View style={{ flex: 1 }}>
-       
         <Auth />
       </View>
     );
@@ -31,52 +23,57 @@ export default function TabsLayout() {
     <View style={{ flex: 1 }}>
       <AppHeader />
 
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: colors.primarylight,
-        tabBarInactiveTintColor: colors.secondary,
-        headerStyle: {
-          backgroundColor: colors.secondary,
-        },
-        headerShadowVisible: false,
-        headerTintColor: colors.darkbackground,
-        tabBarStyle: {
-          backgroundColor: colors.secondarydark,
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="tacoBuilder"
-        options={{
-          headerTitle: "Taco Builder",
-          tabBarIcon: ({ color,focused }) => (
-            <MaterialCommunityIcons name={"taco"} size={24} color={color} />
-          ),
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveTintColor: colors.primarylight,
+          tabBarInactiveTintColor: colors.secondary,
+          headerStyle: {
+            backgroundColor: colors.secondary,
+          },
+          headerShadowVisible: false,
+          headerTintColor: colors.darkbackground,
+          tabBarStyle: {
+            backgroundColor: colors.secondarydark,
+          },
         }}
-      />
-      <Tabs.Screen
-        name="menu"
-        options={{
-          headerTitle: "Menu",
-          tabBarIcon: ({ focused, color }) => (
-            <MaterialIcons name={focused ? "menu" : "menu-book"} size={24} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="cart"
-        options={{
-          headerTitle: "Cart",
-          tabBarIcon: ({ focused, color }) => (
-            <Feather name={focused ? "shopping-cart" : "shopping-cart"} size={24} color={color} />
-          ),
-        }}
-      />
-
-    
-    
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="tacoBuilder"
+          options={{
+            headerTitle: "Taco Builder",
+            tabBarIcon: ({ color, focused }) => (
+              <MaterialCommunityIcons name={"taco"} size={24} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            headerTitle: "Profile",
+            tabBarIcon: ({ focused, color }) => (
+              <MaterialIcons
+                name={focused ? "person" : "person-outline"}
+                size={24}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="leaderboard"
+          options={{
+            headerTitle: "Leaderboard",
+            tabBarIcon: ({ focused, color }) => (
+              <Feather
+                name={focused ? "award" : "award"}
+                size={24}
+                color={color}
+              />
+            ),
+          }}
+        />
+      </Tabs>
     </View>
   );
 }
